@@ -1,102 +1,51 @@
 <template>
   <div class="video-carousel">
+    <p v-if="pending">Chargement des vidéos...</p>
+    <p v-if="error">Erreur lors du chargement des vidéos.</p>
+
     <div 
-      v-for="(film, index) in filteredFilms" 
-      :key="film.videos?.find(video => video.videoType === 'youtube')?.videoId" 
+      v-for="(film, index) in films" 
+      :key="film.id" 
       class="video-container"
       :class="{ active: index === currentIndex }"
     >
-      <transition name="fade" mode="out-in">
-        <iframe
-          v-if="film.videos?.some(video => video.videoType === 'youtube' && video.embedUrl)"
-          :src="`${film.videos.find(video => video.videoType === 'youtube')?.embedUrl}?autoplay=1&controls=0&mute=1&start=10&end=40&rel=0&loop=1&playlist=${film.videos.find(video => video.videoType === 'youtube')?.videoId}`"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </transition>
+      <iframe
+        :src="`${film.videos[0].embedUrl}?autoplay=1&controls=0&mute=1&start=10&end=40&rel=0&loop=1&playlist=${film.videos[0].videoId}`"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
 
-      <!-- Contenu de la vidéo (titre, texte, bouton de découverte) -->
-      <transition name="fade" mode="out-in">
-        <div v-if="index === currentIndex" class="film-info">
-          <h2>{{ film.title }}</h2>
-          <p>{{ film.subtitle }}</p>
-          <NuxtLink :to="film.detailPage" class="btn-discover">Découvrir</NuxtLink>
-        </div>
-      </transition>
-
-      <!-- Bouton pour descendre -->
-      <transition name="fade" mode="out-in">
-        <BtnScroll 
-          v-if="index === currentIndex" 
-          class="btn-scroll" 
-          :section-to-scroll="sectionToScroll" 
-          :btn-content="btnContent"
-        />
-      </transition>
+      <div class="film-info">
+        <h2>{{ film.title }}</h2>
+        <p>{{ film.subtitle }}</p>
+        <NuxtLink :to="film.detailPage" class="btn-discover">Découvrir</NuxtLink>
+      </div>
     </div>
 
-    <!-- Boutons de navigation -->
     <button class="nav-button prev" @click="prevSlide">❮</button>
     <button class="nav-button next" @click="nextSlide">❯</button>
   </div>
 </template>
 
-<script setup lang="ts">
-import { useFetch } from "nuxt/app";
-import { ref, computed, onMounted, onUnmounted } from "vue";
+<script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+import { useFetch } from "#app";
 
-import BtnScroll from "./BtnScroll.vue";
+// ✅ **Ne récupérer que les films ayant au moins une vidéo YouTube dès la requête API**
+const { data: films, pending, error } = useFetch('/api/films?videoType=youtube');
 
-// Charger les films depuis l'API
-const { data: films, pending, error } = useFetch('/api/films');
-
-// Filtrer les films ayant des vidéos YouTube
-const filteredFilms = computed(() => {
-  return films.value?.filter(film =>
-    film?.videos?.some(video => video.videoType === "youtube")
-  ) ?? [];
-});
-
-
+// ✅ **Gestion du carrousel**
 const currentIndex = ref(0);
 let intervalId = null;
 
-// Fonction pour aller à la vidéo suivante
-const nextSlide = () => {
-  currentIndex.value = (currentIndex.value + 1) % filteredFilms.value.length;
-};
+const nextSlide = () => { currentIndex.value = (currentIndex.value + 1) % films.value.length; };
+const prevSlide = () => { currentIndex.value = (currentIndex.value - 1 + films.value.length) % films.value.length; };
 
-// Fonction pour aller à la vidéo précédente
-const prevSlide = () => {
-  currentIndex.value = (currentIndex.value - 1 + filteredFilms.value.length) % filteredFilms.value.length;
-};
-
-// Auto-play toutes les 30 secondes
-const startAutoPlay = () => {
-  intervalId = setInterval(() => {
-    nextSlide();
-  }, 30000);
-};
-
-// Arrêter l'auto-play lorsqu'on quitte le composant
-const stopAutoPlay = () => {
-  if (intervalId) clearInterval(intervalId);
-};
-
-// Gestion du cycle de vie
-onMounted(() => {
-  startAutoPlay();
-});
-
-onUnmounted(() => {
-  stopAutoPlay();
-});
-
-// Variable pour la section à scroller
-const sectionToScroll = ".about-container";
-const btnContent = "Découvrir l'univers de CG-Film";
+onMounted(() => { intervalId = setInterval(nextSlide, 30000); });
+onUnmounted(() => { clearInterval(intervalId); });
 </script>
+
 
 
 <style scoped>
