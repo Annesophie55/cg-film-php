@@ -2,38 +2,41 @@
   <div class="film-card" v-if="film">
     <div class="film-card__wrapper">
       <div class="film-card__image">
-        <NuxtLink :to="film.detailPage">
-          <NuxtImg :src="film.poster" :alt="film.title" width="220" loading="lazy"/>
+        <NuxtLink :to="film.detail_page" v-if="film.detail_page">
+          <NuxtImg :src="film.poster" :alt="film.title" width="220" loading="lazy" :provider="null"/>
         </NuxtLink>
       </div>
       <div class="film-card__details">
         <div class="film-card__content">
           <h3>{{ film.title }}</h3>
-          <p>Sortie : {{ film.releaseDate }}</p>
+          <p>Sortie : {{ film.release_date }}</p>
           <div class="film-card__description">
-          <p>{{ film.description }}</p>
-        </div>
+            <p>{{ film.description }}</p>
+          </div>
         </div>
       </div>
     </div>
+
     <div class="film-card__footer">
       <div class="film-card__cta">
-      <NuxtLink v-if="film.detailPage" :to="film.detailPage" class="btn-discover">
-        Voir la fiche
-      </NuxtLink>
-      <NuxtLink v-if="film.videos && film.videos.some(video=>video.videoType === 'youtube')" :to="film.videos.find(video=>video.embedUrl)" class="btn-watch">
-        Bande-annonce
-      </NuxtLink>
+        <NuxtLink v-if="film.detail_page" :to="film.detail_page" class="btn-discover">
+          Voir la fiche
+        </NuxtLink>
+
+        <a v-if="film.embed_url" :href="film.embed_url" target="_blank" class="btn-watch">
+          Bande-annonce
+        </a>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import type { Film } from "@/api/films"; // ✅ Import de l'interface Film
-
-defineProps<{ film: Film }>(); // ✅ Typage strict de la prop `film`
+<script setup>
+defineProps({
+  film: Object
+});
 </script>
+
 
 
 <style scoped lang="scss">

@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 //Variables pour la section à scroller
 const props = defineProps<{
   sectionToScroll: string;

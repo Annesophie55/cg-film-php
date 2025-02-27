@@ -63,8 +63,8 @@
           <article class="article-content_txt">
               <p>"Cinéaste autodidacte, j'ai eu la chance de réaliser plusieurs films pour la télévision française, <strong>diffusés dans plus de 22 pays</strong>. Mon premier long-métrage, Il était une fois... Les Sabots de Vénus, tourné en décors naturels, m’a ouvert les portes du prestigieux <strong>Festival de Cannes</strong>. Parmi mes œuvres marquantes :</p>
               <ul>
-                <li><NuxtImg src="/images/icon_camera.webp" alt="icone d'une caméra" width="30" height="30" class="icon_camera_puce"/>Le Radeau, une prouesse sportive unique en coproduction avec France 2, diffusée plus de 500 fois dans le monde entier.</li>
-                <li><NuxtImg src="/images/icon_camera.webp" alt="icone d'une caméra" width="30" height="30" class="icon_camera_puce"/>L’Aile et la Bête, un défi inédit en ULM, filmé dans le Grand Canyon du Verdon. Aujourd’hui, je poursuis ma passion en montant un documentaire de 90 minutes et en développant le scénario de mon prochain long-métrage : Les Embruns de Liberté."</li>
+                <li><NuxtImg src="/images/icons/icon_camera.webp" alt="icone d'une caméra" width="30" height="30" class="icon_camera_puce"/>Le Radeau, une prouesse sportive unique en coproduction avec France 2, diffusée plus de 500 fois dans le monde entier.</li>
+                <li><NuxtImg src="/images/icons/icon_camera.webp" alt="icone d'une caméra" width="30" height="30" class="icon_camera_puce"/>L’Aile et la Bête, un défi inédit en ULM, filmé dans le Grand Canyon du Verdon. Aujourd’hui, je poursuis ma passion en montant un documentaire de 90 minutes et en développant le scénario de mon prochain long-métrage : Les Embruns de Liberté."</li>
               </ul>
           </article>
           <aside >

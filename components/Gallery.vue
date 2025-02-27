@@ -1,17 +1,19 @@
 <template>
   <div class="film-gallery">
-    <FilmCard v-for="film in films" :key="film.id" :film="film" />
+    <FilmCard v-for="film in films" :key="film.film_id" :film="film" />
   </div>
 </template>
 
 <script setup>
 import FilmCard from "./FilmCard.vue";
 
-// Déclaration des props en JavaScript
 defineProps({
   films: Array
 });
+
+
 </script>
+
 
 <style scoped lang="scss">
 .film-gallery {

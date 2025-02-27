@@ -95,7 +95,7 @@
           <div class="laser-effect"></div>
         </div>
         <div class="timeline-img__container" @click="openCard(2)">
-          <NuxtImg src="/images/partners/france_tele.webp" alt="Icone France TV" width="110" height="110"/>
+          <NuxtImg src="/images/france_tele.webp" alt="Icone France TV" width="110" height="110"/>
           <div class="laser-effect"></div>
         </div>
         <div class="timeline-img__container" @click="openCard(3)">

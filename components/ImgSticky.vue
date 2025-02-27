@@ -5,17 +5,15 @@
       </figure>
 </template>
 
-<script setup lang="ts">
-import { defineProps } from 'vue';
+<script setup>
 
-const props = defineProps<{
-  src: string;
-  alt: string;
-  width?: number;
-  height?: number;
-  caption?: string; // Optionnel
-}>();
-
+const props = defineProps({
+  src: String,
+  alt: String,
+  width: [String, Number], 
+  height: [String, Number], 
+  caption: String,
+});
 
 </script>
 

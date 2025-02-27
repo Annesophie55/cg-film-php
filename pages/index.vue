@@ -31,7 +31,9 @@
 
       <section class="films">
         <h2 class="section-title">Les œuvres de Jimmy-Paul Coti</h2>
-        <Gallery />
+        <Gallery :films="films?.slice(0, 2) ?? []" v-if="films && films.length" />
+        <p v-else>Chargement des films...</p>
+
       </section>
 
       <section class="impact">
@@ -111,8 +113,17 @@ import Banderole from '~/components/Banderole.vue';
 import Parallax from '~/components/Parallax.vue';
 import NumberCounter from '~/components/NumberCounter.vue';
 import { useFetch } from '#app';
-components : {Header, Footer, Carrousel, Gallery, Banderole, Parallax, NumberCounter}
-const { data: partners } = useFetch('/api/partners');
+
+// Fetch des films
+const { data: films } = useFetch('http://localhost/cg-film-new/server/api/films_card.php', {
+  transform: (res) => Array.isArray(res) ? res : [res]
+});
+
+
+
+
+console.log(films);
+
 </script>
 
 <style scoped lang="scss">

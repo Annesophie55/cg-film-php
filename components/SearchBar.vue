@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <div class="search-bar">
     <div class="search-input">
       <input
@@ -8,7 +8,7 @@
         @keydown.down.prevent="navigate(1)"
         @keydown.up.prevent="navigate(-1)"
         @keydown.enter.prevent="selectItem()"
-        placeholder="Rechercher par titre, acteur, année, tag..."
+        placeholder="Rechercher par titre ou acteur"
       />
       <button @click="performSearch">
         🔍
@@ -29,74 +29,55 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, computed, defineProps, defineEmits } from "vue";
-import type { Film } from "@/api/films";
+<script setup>
+import { ref, computed, defineEmits } from "vue";
 
-// Définition des props
-const props = defineProps<{ films: Film[] }>();
+const emit = defineEmits(["itemSelected"]);
 
-// Définition des événements
-const emit = defineEmits(["searchQueryChanged"]);
+const searchQuery = ref("");
+const selectedIndex = ref(-1);
 
-// Variables réactives
-const searchQuery = ref<string>("");
-const selectedIndex = ref<number>(-1);
-
-// Générer une liste de suggestions basée sur titre, tags, acteurs, date de sortie
+// Liste des résultats de la recherche (titres + acteurs)
 const filteredItems = computed(() => {
   if (!searchQuery.value) return [];
 
-  return props.films
-    .flatMap((film) => [
-      film.title,
-      ...film.tags ?? [],
-      film.releaseDate,
-      ...(film.cast?.map(cast => cast.name) ?? []),
-    ])
+  return [
+    "L'Aile et la Bête", // Titres fictifs
+    "Les Sabots de Vénus",
+    "Patrice Barkouda", // Acteur fictif
+    "Natalie Lagrange"
+  ]
     .filter((item) => item.toLowerCase().includes(searchQuery.value.toLowerCase()))
-    .slice(0, 5); // Limite les suggestions à 5
+    .slice(0, 5);
 });
 
-// Met à jour la recherche quand l'utilisateur tape
-const filterResults = () => {
-  selectedIndex.value = -1;
-  emit("searchQueryChanged", searchQuery.value);
+// Fonction pour gérer la sélection d'un élément
+const selectItem = (index = selectedIndex.value) => {
+  if (index !== -1 && filteredItems.value.length > 0) {
+    searchQuery.value = filteredItems.value[index];
+    emit("itemSelected", searchQuery.value); // ✅ Émet bien l’événement
+  }
 };
 
-// Navigation au clavier (flèches)
-const navigate = (direction: number) => {
+// Navigation au clavier
+const navigate = (direction) => {
   if (filteredItems.value.length === 0) return;
   selectedIndex.value =
     (selectedIndex.value + direction + filteredItems.value.length) %
     filteredItems.value.length;
 };
 
-// Survol d'une suggestion
-const hoverItem = (index: number) => {
+// Gestion du survol des éléments
+const hoverItem = (index) => {
   selectedIndex.value = index;
 };
-
-// Sélection d'une suggestion
-const selectItem = (index: number = selectedIndex.value) => {
-  if (index !== -1 && filteredItems.value.length > 0) {
-    searchQuery.value = filteredItems.value[index];
-    emit("searchQueryChanged", searchQuery.value);
-    resetSearch();
-  }
-};
-
-// Recherche manuelle avec bouton
-const performSearch = () => {
-  emit("searchQueryChanged", searchQuery.value);
-  resetSearch();
-};
-
-// Réinitialisation
-const resetSearch = () => {
-  selectedIndex.value = -1;
-};
 </script>
+
+
+
+
+
+
 
 <style scoped>
 .search-bar {
@@ -139,4 +120,4 @@ button:hover {
 .suggestions li.selected {
   background: #f0f0f0;
 }
-</style> -->
+</style>

@@ -3,13 +3,13 @@
     <div class="banderole-track">
       <div class="banderole-container">
         <div class="banderole-content" v-for="(partner, index) in partners" :key="index">
-          <NuxtImg :src="partner.logo" :alt="partner.image_alt" width="150" />
+          <NuxtImg :src="partner.logo" :alt="partner.image_alt" width="150" :provider="null"/>
         </div>
       </div>
       <!-- Clone pour effet infini -->
       <div class="banderole-container">
         <div class="banderole-content" v-for="(partner, index) in partners" :key="'clone-' + index">
-          <NuxtImg :src="partner.logo" :alt="partner.image_alt" width="150" />
+          <NuxtImg :src="partner.logo" :alt="partner.image_alt" width="150" :provider="null" />
         </div>
       </div>
     </div>
@@ -19,7 +19,10 @@
 <script setup>
 import { useFetch } from "#app";
 
-const { data: partners } = useFetch('/api/partners');
+const { data: partners } = useFetch('http://localhost/cg-film-new/server/api/partners.php', {
+  transform: (res) => Array.isArray(res) ? res : [res] // Force en tableau si besoin
+});
+
 </script>
 
 

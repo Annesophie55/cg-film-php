@@ -13,23 +13,28 @@
     </ul>
 
     <iframe
-      :src="`${film.embedUrl}?autoplay=1&controls=1&mute=0`"
+      v-if="film.embed_url"
+      :src="`${film.embed_url}?autoplay=1&controls=1&mute=0`"
       frameborder="0"
       allow="autoplay; encrypted-media"
       allowfullscreen
     ></iframe>
   </div>
-  <div v-else>
+  <div v-else-if="error">
     <h1>Film non trouvé</h1>
     <p>Le film demandé n'existe pas dans notre base de données.</p>
   </div>
+  <div v-else>
+    <p>Chargement en cours...</p>
+  </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { useRoute } from 'vue-router';
-import films from '~/data/films';
+import { useFetch } from "#app";
 
 // Récupérer le slug depuis l'URL
 const route = useRoute();
-const film = films.find(f => f.detailPage === `/films/${route.params.slug}`);
+const { data: film, error } = useFetch(`http://localhost/cg-film-new/server/api/film_details.php?slug=${route.params.slug}`);
+
 </script>

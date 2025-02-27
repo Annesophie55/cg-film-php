@@ -1,5 +1,8 @@
 <template>
+  <div v-if="films && films.length > 0" class="video-carousel">
+
   <div class="video-carousel">
+
     <p v-if="pending">Chargement des vidéos...</p>
     <p v-if="error">Erreur lors du chargement des vidéos.</p>
 
@@ -9,12 +12,15 @@
       class="video-container"
       :class="{ active: index === currentIndex }"
     >
-      <iframe
-        :src="`${film.videos[0].embedUrl}?autoplay=1&controls=0&mute=1&start=10&end=40&rel=0&loop=1&playlist=${film.videos[0].videoId}`"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
+    <iframe
+    v-if="film.videos && film.videos.length > 0"
+    :src="`${film.videos[0].embed_url}?autoplay=1&controls=0&mute=1&start=10&end=40&rel=0&loop=1&playlist=${film.videos[0].video_id}`"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+    ></iframe>
+
+
 
       <div class="film-info">
         <h2>{{ film.title }}</h2>
@@ -26,6 +32,7 @@
     <button class="nav-button prev" @click="prevSlide">❮</button>
     <button class="nav-button next" @click="nextSlide">❯</button>
   </div>
+  </div>
 </template>
 
 <script setup>
@@ -33,14 +40,24 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { useFetch } from "#app";
 
 // ✅ **Ne récupérer que les films ayant au moins une vidéo YouTube dès la requête API**
-const { data: films, pending, error } = useFetch('/api/films?videoType=youtube');
+const { data: films, pending, error } = useFetch('http://localhost/cg-film-new/server/api/films_carrousel.php', {
+  transform: (res) => Array.isArray(res) ? res : [res] // Force en tableau si besoin
+});
 
 // ✅ **Gestion du carrousel**
 const currentIndex = ref(0);
 let intervalId = null;
 
-const nextSlide = () => { currentIndex.value = (currentIndex.value + 1) % films.value.length; };
-const prevSlide = () => { currentIndex.value = (currentIndex.value - 1 + films.value.length) % films.value.length; };
+const nextSlide = () => {
+  if (!films.value || films.value.length === 0) return; // Vérification de sécurité
+  currentIndex.value = (currentIndex.value + 1) % films.value.length;
+};
+
+const prevSlide = () => {
+  if (!films.value || films.value.length === 0) return; // Vérification de sécurité
+  currentIndex.value = (currentIndex.value - 1 + films.value.length) % films.value.length;
+};
+
 
 onMounted(() => { intervalId = setInterval(nextSlide, 30000); });
 onUnmounted(() => { clearInterval(intervalId); });
