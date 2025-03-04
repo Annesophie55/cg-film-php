@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/../../config/database.php';
 
 // Headers pour JSON et CORS (si besoin)
 header("Access-Control-Allow-Origin: *");
@@ -11,10 +11,13 @@ $request = $_SERVER['REQUEST_URI'];
 // Routeur simple
 switch ($request) {
     case '/api/films_carrousel':
-        require __DIR__ . '/api/films_carrousel.php';
+        require __DIR__ . '/api/films_details.php';
         break;
     case '/api/films_search':
         require __DIR__ . '/api/films_search.php';
+        break;
+    case '/api/films_carrousel':
+        require __DIR__ . '/api/films_carrousel.php';
         break;
     case '/api/films':
         require __DIR__ . '/api/films_card.php';
@@ -30,3 +33,4 @@ switch ($request) {
         echo json_encode(["error" => "Route not found"]);
         break;
 }
+?>

@@ -56,16 +56,27 @@ cite{
   margin-top: 15px;
 }
 
-// h2{
-//     text-align: center;
-//     width: 100%;
-//     margin-bottom: 30px;
-//     background: rgb(12, 173, 161);
-//     background: linear-gradient(212deg, rgba(12, 173, 161, 1) 30%, rgba(12, 148, 138, 0.9831168356906163) 48%, rgba(14, 124, 139, 1) 78%);
-//     font-family: var(--font-secondary);
-//     color: var(--white);
-//     padding: 45px;
-// }
+.btn-translucide {
+  background-color: var(--white);
+  color: var(--gray-dark);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.8;
+  box-shadow: 0 0 5px var(--gray-dark);
+  margin: 0 auto 40px auto;
+  width: 75%;
+  height: auto;
+  font-family: var(--font-primary-bold);
+  font-weight: 700;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .impact-container{
   display: grid;
@@ -118,12 +129,11 @@ cite{
 
 .partners-container {
   display: flex;
-  align-items: center;
   justify-content: center;
   flex-wrap: wrap-reverse;
   padding: 60px;
   width: 100vw;
-  gap: 20px;
+  gap: 40px;
 }
 
 .partners-text {
@@ -155,6 +165,11 @@ cite{
       height: auto;
     }
   }
+}
+
+.film {
+  display: flex;
+  justify-content: center;
 }
 
 .img-fixed-container {

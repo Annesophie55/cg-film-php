@@ -60,7 +60,15 @@
   }
   h3{
     color: var(--blue-primary);
-    margin-top: 20px
   }
 
+}
+
+@media (max-width: 400px){
+  .film-card__wrapper{
+    flex-direction: column;
+  }
+  .film-card__details{
+    margin-left: 0px;
+  }
 }

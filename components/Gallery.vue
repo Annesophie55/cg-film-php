@@ -1,17 +1,12 @@
 <template>
   <div class="film-gallery">
-    <FilmCard v-for="film in films" :key="film.film_id" :film="film" />
+    <FilmCard v-for="film in searchResults.films" :key="film.film_id" :film="film" />
   </div>
 </template>
 
 <script setup>
-import FilmCard from "./FilmCard.vue";
-
-defineProps({
-  films: Array
-});
-
-
+import FilmCard from "@/components/FilmCard.vue";
+import { searchResults } from "@/composables/searchStore";
 </script>
 
 
@@ -23,6 +18,7 @@ defineProps({
   justify-content: center;
   align-items: center;
   padding: 20px;
-  margin: 45px 0;
+  margin: 5% 0;
+  top: 20%;
 }
 </style>

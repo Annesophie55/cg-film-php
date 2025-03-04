@@ -33,7 +33,9 @@
         <h2 class="section-title">Les œuvres de Jimmy-Paul Coti</h2>
         <Gallery :films="films?.slice(0, 2) ?? []" v-if="films && films.length" />
         <p v-else>Chargement des films...</p>
-
+        <NuxtLink to="/allFilms" class="btn-translucide">
+        Accéder à la filmographie complète
+        </NuxtLink>
       </section>
 
       <section class="impact">

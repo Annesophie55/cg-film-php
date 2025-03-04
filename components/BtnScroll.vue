@@ -16,7 +16,7 @@
         <polyline points="6 9 12 15 18 9"></polyline>
       </svg>
     </span>
-    <span class="btn-scroll__text">{{ btnContent }}</span>
+    <!-- <span class="btn-scroll__text">{{ btnContent }}</span> -->
   </button>
 </template>
 
@@ -46,7 +46,7 @@ const scrollToNextSection = (): void => {
   background-color: transparent;
   cursor: pointer;
   font-size: 18px;
-  color: var(--gray-light);
+  color: white;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
@@ -76,8 +76,12 @@ const scrollToNextSection = (): void => {
   }
 
   .btn-scroll__text{
-    padding: 10px 20px;
     font-family: var(--font-secondary);
+    color: white;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 1.2rem;
   }
 }
 </style>

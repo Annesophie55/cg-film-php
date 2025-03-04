@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 
 try {
     $query = "SELECT f.id, f.title, f.subtitle, f.release_date, f.description, 
-                     f.synopsis, f.detail_page, fv.embed_url, fv.video_id
+                     f.synopsis, f.slug, fv.embed_url, fv.video_id
               FROM films f 
               LEFT JOIN film_videos fv ON f.id = fv.film_id 
               WHERE fv.video_type = 'youtube'"; 
@@ -27,7 +27,7 @@ try {
                 "release_date" => $row['release_date'],
                 "description" => $row['description'],
                 "synopsis" => $row['synopsis'],
-                "detail_page" => $row['detail_page'],
+                "slug" => $row['slug'],
                 "videos" => []
             ];
         }

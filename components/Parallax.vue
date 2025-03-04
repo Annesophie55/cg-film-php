@@ -23,8 +23,8 @@ const props = defineProps<{
 }
 
 .bg-container {
- background-position: center;
- background-attachment: fixed;
+  background-position: center;
+  background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
   position: absolute;

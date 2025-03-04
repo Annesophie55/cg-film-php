@@ -1,30 +1,41 @@
 <?php
-require_once "config/database.php"; // Connexion à MySQL
+$path = __DIR__ . '/../config/database.php';
+echo "Chemin calculé : $path\n";
 
-$filmTags = [
-    [1, 1], // Les Sabots de Vénus → Long métrage
-    [1, 4], // Les Sabots de Vénus → Nominé
-    [2, 5], // L'Aile et la Bête → Court métrage
-    [2, 4], // L'Aile et la Bête → Nominé
-    [2, 2], // L'Aile et la Bête → Documentaire
-    [3, 5], // Le Radeau → Court métrage
-    [4, 1], // Aventure sur la Rivière Blanche → Long métrage
-    [4, 4], // Aventure sur la Rivière Blanche → Nominé
-    [5, 1], // Les Chemins de l’Or Blanc → Long métrage
-    [5, 2], // Les Chemins de l’Or Blanc → Documentaire
-    [5, 6], // Les Chemins de l’Or Blanc → En production
-    [6, 3]  // Hay Qué → Clip musical
-];
-
-$stmt = $pdo->prepare("INSERT INTO film_tag (film_id, tag_id) VALUES (?, ?)");
-foreach ($filmTags as $filmTag) {
-    $stmt->execute($filmTag);
+if (!file_exists($path)) {
+    die("❌ Le fichier n'existe pas à cet emplacement !");
 }
-echo "✅ Relations films/tags insérées avec succès !\n";
+
+require_once $path;
+echo "✅ Fichier database.php inclus avec succès !";
+
+
+// Connexion à MySQL
+
+// $filmTags = [
+//     [1, 1], // Les Sabots de Vénus → Long métrage
+//     [1, 4], // Les Sabots de Vénus → Nominé
+//     [2, 5], // L'Aile et la Bête → Court métrage
+//     [2, 4], // L'Aile et la Bête → Nominé
+//     [2, 2], // L'Aile et la Bête → Documentaire
+//     [3, 5], // Le Radeau → Court métrage
+//     [4, 1], // Aventure sur la Rivière Blanche → Long métrage
+//     [4, 4], // Aventure sur la Rivière Blanche → Nominé
+//     [5, 1], // Les Chemins de l’Or Blanc → Long métrage
+//     [5, 2], // Les Chemins de l’Or Blanc → Documentaire
+//     [5, 6], // Les Chemins de l’Or Blanc → En production
+//     [6, 3]  // Hay Qué → Clip musical
+// ];
+
+// $stmt = $pdo->prepare("INSERT INTO film_tag (film_id, tag_id) VALUES (?, ?)");
+// foreach ($filmTags as $filmTag) {
+//     $stmt->execute($filmTag);
+// }
+// echo "✅ Relations films/tags insérées avec succès !\n";
 
 
 // // 1️⃣ INSÉRER LES FILMS
-// $stmt = $pdo->prepare("INSERT INTO films (id, title, subtitle, release_date, description, synopsis, detail_page) 
+// $stmt = $pdo->prepare("INSERT INTO films (id, title, subtitle, release_date, description, synopsis, slug) 
 // VALUES (?, ?, ?, ?, ?, ?, ?)");
 
 // $films = [
@@ -182,42 +193,57 @@ echo "✅ Relations films/tags insérées avec succès !\n";
 
 // echo "✅ Acteurs insérés avec succès !";
 
-// $stmt = $pdo->prepare("INSERT INTO film_images (film_id, src, alt, type) VALUES (?, ?, ?, ?)");
+$stmt = $pdo->prepare("INSERT INTO film_images (film_id, src, alt, type) VALUES (?, ?, ?, ?)");
 
-// $film_images = [
-//     // 🎬 Les Sabots de Vénus
-//     [1, "/images/sdv/sabots_venus.webp", "Affiche du film Les Sabots de Vénus", "poster"],
-//     [1, "/images/sdv/barbier_coti.webp", "Christian Barbier et Jimmy-Paul Coti", "photo"],
-//     [1, "/images/sdv/barbier_menard.webp", "Christian Barbier et Jimmy-Paul Coti", "photo"],
-//     [1, "/images/sdv/barbier_mouraud.webp", "Christian Barbier, Jacques Mouraud et Jimmy-Paul Coti", "photo"],
-//     [1, "/images/sdv/gallier.webp", "Marc Gallier | Maître Pisier au tribunal", "photo"],
+$film_images = [
+    // 🎬 Les Sabots de Vénus
+    [1, "/images/sdv/christian_barbier_1.webp", "Christian Barbier", "photo"],
+    [1, "/images/sdv/chrisitian_barbier_2.webp", "Christian Barbier", "photo"],
+    [1, "/images/sdv/chrisitian_barbier_3.webp", "Christian Barbier", "photo"],
+    [1, "/images/sdv/chrisitian_barbier_4.webp", "Joseph devant les tombes", "photo"],
+    [1, "/images/sdv/egalon_barbier_1.webp", "Jean-Paul Egalon et Christian Barbier", "photo"],
+    [1, "/images/sdv/egalon_barbier_2.webp", "Jean-Paul Egalon et Christian Barbier", "photo"],
+    [1, "/images/sdv/egalon_rasmus.webp", "Jean-Paul Egalon et Michel Rasmus", "photo"],
+    [1, "/images/sdv/egalon_sandy.webp", "Jean-Paul Egalon et Sandy", "photo"],
+    [1, "/images/sdv/grue_tournage_sdv.webp", "Jimmy-Paul Coti et Daniel Penez", "photo"],
+    [1, "/images/sdv/jp_egalon_1.webp", "Jean-Paul Egalon", "photo"],
+    [1, "/images/sdv/jp_egalon_2.webp", "Jean-Paul Egalon", "photo"],
+    [1, "/images/sdv/jp_egalon_3.webp", "Jean-Paul Egalon", "photo"],
+    [1, "/images/sdv/knop.webp", "Gregory Knop", "photo"],
+    [1, "/images/sdv/nehr_sammut.webp", "Jean Nehr et Norbert Sammut", "photo"],
+    [1, "/images/sdv/sylve_nehr_coti.webp", "Paul Sylve, Jean Nehr et Jimmy-Paul Coti", "photo"],
 
-//     // 🎬 L'Aile et la Bête
-//     [2, "/images/aile_bete/aile.webp", "Affiche du film L'Aile et la Bête", "poster"],
-//     [2, "/images/aile_bete/knop_egalon.webp", "Gregory Knop et Jean-Paul Egalon", "photo"],
-//     [2, "/images/aile_bete/scene_ulm.webp", "Dernier briefing avant le décollage", "photo"],
+    // 🎬 L'Aile et la Bête
+    [2, "/images/aile_bete/scene_ulm.webp", "Dernier briefing avant le décollage", "photo"],
+    [2, "/images/aile_bete/patrice_barcouda.webp", "Patrice Barcouda dans la tourmente", "photo"],
+    [2, "/images/aile_bete/preparation.webp", "Photo-montage des étapes de préparation", "photo"],
 
-//     // 🎬 Le Radeau
-//     [3, "/images/radeau/radeau.webp", "Affiche du film Le Radeau", "poster"],
-//     [3, "/images/radeau/alain_mallet_cadreur.webp", "Alain Mallet | Cadreur", "photo"],
-//     [3, "/images/radeau/francis_gome_cadreur.webp", "Francis Gome | Cadreur", "photo"],
+    // 🎬 Le Radeau
+    [3, "/images/radeau/jimmy_radeau_nb.webp", "Jean-Pierre Coindet descendant le Verdon", "photo"],
+    [3, "/images/radeau/jimmy_radeau_sepia.webp", "Raft en radeau sur le Verdon", "photo"],
+    [3, "/images/radeau/jimmy_radeau_near.webp", "Jean-Pierre Coindet s'improvise cascadeur", "photo"],
+    [3, "/images/radeau/sanson.webp", "Gorges du Verdon", "photo"],
 
-//     // 🎬 Aventure sur la Rivière Blanche
-//     [4, "/images/riviere/riviere.webp", "Affiche du film Aventure sur la Rivière Blanche", "poster"],
-//     [4, "/images/radeau/francis_gome_cadreur.webp", "Francis Gome | Cadreur", "photo"],
+    // 🎬 Aventure sur la Rivière Blanche
+    [4, "/images/riviere/alain_mallet_cadreur.webp", "Alain Mallet | Cadreur", "photo"],
+    [4, "/images/radeau/francis_gome_cadreur.webp", "Francis Gome | Cadreur", "photo"],
+    [4, "/images/radeau/jimmy_radeau_nb.webp", "Jean-Pierre Coindet descendant le Verdon", "photo"],
+    [4, "/images/radeau/jimmy_radeau_sepia.webp", "Raft en radeau sur le Verdon", "photo"],
+    [4, "/images/radeau/jimmy_radeau_near.webp", "Jean-Pierre Coindet s'improvise cascadeur", "photo"],
+    [4, "/images/radeau/sanson.webp", "Gorges du Verdon", "photo"],
 
-//     // 🎬 Les Chemins de l'Or Blanc
-//     [5, "/images/chemins_or_blanc/chemin_or_blanc_affiche.webp", "Affiche du film Les Chemins de l’Or Blanc", "poster"],
+    // // 🎬 Les Chemins de l'Or Blanc
+    // [5, "/images/chemins_or_blanc/chemin_or_blanc_affiche.webp", "Affiche du film Les Chemins de l’Or Blanc", "poster"],
 
-//     // 🎬 Hay Qué
-//     [6, "/images/hay_que/hay_que_poster.webp", "Affiche du clip Hay Qué", "poster"]
-// ];
+    // // 🎬 Hay Qué
+    // [6, "/images/hay_que/hay_que_poster.webp", "Affiche du clip Hay Qué", "poster"]
+];
 
-// foreach ($film_images as $image) {
-//     $stmt->execute($image);
-// }
+foreach ($film_images as $image) {
+    $stmt->execute($image);
+}
 
-// echo "✅ Images des films insérées avec succès !";
+echo "✅ Images des films insérées avec succès !";
 
 // $stmt = $pdo->prepare("INSERT INTO film_roles (film_id, actor_id, role) VALUES (?, ?, ?)");
 

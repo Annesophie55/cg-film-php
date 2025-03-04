@@ -7,7 +7,7 @@
           <ul>
             <li class="nav-link"><nuxt-link to="/">Accueil</nuxt-link></li>
             <li class="nav-link"><nuxt-link to="/filmMaker">Le réalisateur</nuxt-link></li>
-            <li class="nav-link"><nuxt-link to="/films">Films</nuxt-link></li>
+            <li class="nav-link"><nuxt-link to="/allFilms">Films</nuxt-link></li>
             <li class="nav-link"><nuxt-link to="/featured">En vedette</nuxt-link></li>
             <li class="nav-link"><nuxt-link to="/contact">Contact</nuxt-link></li>
           </ul>

@@ -14,7 +14,7 @@ try {
         f.subtitle,
         f.release_date,
         f.description,
-        f.detail_page,
+        f.slug,
         (SELECT fi.src FROM film_images fi WHERE fi.film_id = f.id AND fi.type = 'poster' LIMIT 1) AS poster,
         (SELECT fv.embed_url FROM film_videos fv WHERE fv.film_id = f.id AND fv.video_type = 'youtube' LIMIT 1) AS embed_url,
         GROUP_CONCAT(DISTINCT t.name SEPARATOR '||') AS tags

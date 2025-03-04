@@ -1,0 +1,278 @@
+main {
+  overflow-x: hidden;
+  margin-top: 0;
+}
+.cinema-scene {
+  position: relative;
+  width: 110%;
+  height: 200px;
+  margin-top: 74px;
+  background: linear-gradient(90deg, #000, #333, #000);
+  border: 6px solid black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 5%;
+}
+
+.film-title {
+  color: white;
+  font-size: clamp(2rem, 5vw, 2rem);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-50px);
+  font-family: var(--font-secondary-bold-italic);
+  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 400px) {
+    width: 100%;
+    font-size: clamp(1rem, 2vw, 1rem);
+  }
+}
+
+.cinema-scene::before,
+.cinema-scene::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: radial-gradient(circle, var(--black) 60%, transparent 70%);
+  background-size: 20px 10px;
+  z-index: 2;
+  border: 3px solid black;
+}
+
+.cinema-scene::before {
+  top: -10px;
+}
+
+.cinema-scene::after {
+  bottom: -10px;
+  transform: rotate(180deg);
+}
+
+.film-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 🎭 Rideaux avec images */
+.curtain {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  top: 0;
+  z-index: 2;
+  transition: transform 2.5s ease-in-out;
+}
+
+.curtain-left {
+  left: 0;
+  background-image: url('/images/rideau.webp'); /* Image rideau gauche */
+  transform: translateX(0);
+}
+
+.curtain-right {
+  right: 0;
+  background-image: url('/images/rideau.webp'); /* Image rideau droit */
+  transform: translateX(0);
+}
+
+/* Effet d'ouverture */
+.open.curtain-left {
+  transform: translateX(-100%);
+}
+
+.open.curtain-right {
+  transform: translateX(100%);
+}
+
+
+//cast
+.film-details {
+  display: flex;
+  justify-content: center;
+  gap: 10%;
+  align-items: center;
+  margin: 80px 0;
+  color: white;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  font-family: var(--font-primary);
+  font-weight: 300;
+  padding: 0 40px;
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    gap: 20px;
+    width: 100%;
+    padding: 0%;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    margin: 20px;
+  }
+
+
+  hr {
+    border: 1px solid rgb(227, 220, 220);
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.info_cast_release {
+  background: rgb(2, 41, 46);
+  background: linear-gradient(17deg, rgb(2, 39, 44) 62%, rgb(3, 71, 61) 80%, rgb(2, 59, 43) 96%);
+  width: 40%;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    gap: 20px;
+    width: 80%;
+    padding: 10px;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    margin: 20px;
+  }
+
+  .description {
+    text-align: center;
+    margin-bottom: 10px;
+    font-family: var(--font-secondary);
+    font-size: 20px;
+  }
+
+  .release_date {
+    text-align: left;
+    margin: 10px 0;
+  }
+
+  .poster {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+
+}
+
+.cast_container{
+ margin-top: 10px;  
+}
+
+.cast {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 7px;
+  margin-top: 10px;
+}
+
+.actor {
+  display: flex;
+ margin-right: 10px;
+}
+
+.trailer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin: 60px;
+}
+
+hr {
+  border: 1px solid rgb(48, 40, 40);
+  width: 90%;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 800px) {
+    width: 70%;
+  }
+}
+
+.synopsis {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin: 60px;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}
+
+.gallery_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 60px;
+  margin: auto;
+}
+
+.gallery {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 100%;
+  position: relative; 
+  
+  figure {
+    position: relative; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0%;
+    padding: 0;
+    overflow: hidden;
+    width: 380px;
+    height: 280px;
+
+    &:hover figcaption {
+      opacity: 1;
+      transform: translateY(-37px);
+    }
+   
+    img {
+      object-fit: fill;
+      width: 100%;
+      height: 100%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-shrink: 1;
+    }
+
+    figcaption {
+      padding: 10px;
+      text-align: center;
+      font-family: var(--font-primary);
+      font-weight: 300;
+      background: #2d2b2b;
+      width: 110%;
+      height: 50px;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.7s ease-in, transform 0.4s ease-in-out;
+      position: absolute;  // Se positionne par rapport à figure
+      bottom: -37px;           // Positionné en bas de figure
+      left: -2;
+      transform: translateY(0); // Position de départ
+    }
+  }
+}

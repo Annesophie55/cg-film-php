@@ -1,15 +1,15 @@
 <template>
-  <div class="film-card" v-if="film">
+  <div class="film-card" v-if="film && film.title">
     <div class="film-card__wrapper">
       <div class="film-card__image">
-        <NuxtLink :to="film.detail_page" v-if="film.detail_page">
+        <NuxtLink :to="film.slug" v-if="film.slug">
           <NuxtImg :src="film.poster" :alt="film.title" width="220" loading="lazy" :provider="null"/>
         </NuxtLink>
       </div>
       <div class="film-card__details">
         <div class="film-card__content">
           <h3>{{ film.title }}</h3>
-          <p>Sortie : {{ film.release_date }}</p>
+          <p>Sortie : {{ film.release_date || "Date inconnue" }}</p>
           <div class="film-card__description">
             <p>{{ film.description }}</p>
           </div>
@@ -19,7 +19,7 @@
 
     <div class="film-card__footer">
       <div class="film-card__cta">
-        <NuxtLink v-if="film.detail_page" :to="film.detail_page" class="btn-discover">
+        <NuxtLink v-if="film.slug" :to="film.slug" class="btn-discover">
           Voir la fiche
         </NuxtLink>
 
@@ -36,8 +36,6 @@ defineProps({
   film: Object
 });
 </script>
-
-
 
 <style scoped lang="scss">
 @use '@/assets/scss/components/film-card.scss';
