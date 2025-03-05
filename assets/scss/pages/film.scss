@@ -1,6 +1,9 @@
 main {
-  overflow-x: hidden;
   margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
 }
 .cinema-scene {
   position: relative;
@@ -102,24 +105,26 @@ main {
 
 //cast
 .film-details {
-  display: flex;
-  justify-content: center;
-  gap: 10%;
-  align-items: center;
-  margin: 80px 0;
+  gap: 2rem;
   color: white;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
   font-family: var(--font-primary);
   font-weight: 300;
-  padding: 0 40px;
+  padding: 80px;
+  width: 100%;
+  margin: 50px 0;
+  position: relative;
+  padding: 0px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 120vh; /* Assurer une hauteur suffisante */
 
   @media (max-width: 768px) {
     flex-direction: column-reverse;
-    gap: 20px;
-    width: 100%;
-    padding: 0%;
+    align-items: center;
+    padding: 0 20px;
     font-size: clamp(0.8rem, 2vw, 1rem);
-    margin: 20px;
   }
 
 
@@ -133,10 +138,12 @@ main {
 .info_cast_release {
   background: rgb(2, 41, 46);
   background: linear-gradient(17deg, rgb(2, 39, 44) 62%, rgb(3, 71, 61) 80%, rgb(2, 59, 43) 96%);
-  width: 40%;
+  flex: 1 1 60%;
+  min-width: 300px;
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  min-height: fit-content;
 
   @media (max-width: 768px) {
     flex-direction: column-reverse;
@@ -145,6 +152,8 @@ main {
     padding: 10px;
     font-size: clamp(0.8rem, 2vw, 1rem);
     margin: 20px;
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 
   .description {
@@ -158,14 +167,6 @@ main {
     text-align: left;
     margin: 10px 0;
   }
-
-  .poster {
-    width: 100%;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
-
-
 }
 
 .cast_container{
@@ -190,6 +191,20 @@ main {
   align-items: center;
   margin-top: 50px;
   margin: 60px;
+  height: 300px;
+
+  @media (max-width: 768px) {
+    height: 200px;
+  }
+
+  @media (max-width: 400px) {
+    height: 160px;
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 hr {
@@ -218,61 +233,9 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  margin-bottom: 60px;
-  margin: auto;
+  margin: 60px 0 60px 5.5%;
+  width: 90%;
 }
 
-.gallery {
-  display: flex;
-  justify-content: space-between;
-  padding: 40px;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin: auto;
-  width: 100%;
-  position: relative; 
-  
-  figure {
-    position: relative; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0%;
-    padding: 0;
-    overflow: hidden;
-    width: 380px;
-    height: 280px;
 
-    &:hover figcaption {
-      opacity: 1;
-      transform: translateY(-37px);
-    }
-   
-    img {
-      object-fit: fill;
-      width: 100%;
-      height: 100%;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      display: flex;
-      flex-shrink: 1;
-    }
 
-    figcaption {
-      padding: 10px;
-      text-align: center;
-      font-family: var(--font-primary);
-      font-weight: 300;
-      background: #2d2b2b;
-      width: 110%;
-      height: 50px;
-      color: white;
-      opacity: 0;
-      transition: opacity 0.7s ease-in, transform 0.4s ease-in-out;
-      position: absolute;  // Se positionne par rapport à figure
-      bottom: -37px;           // Positionné en bas de figure
-      left: -2;
-      transform: translateY(0); // Position de départ
-    }
-  }
-}

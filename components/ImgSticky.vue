@@ -23,12 +23,12 @@ const props = defineProps({
 /* Conteneur de l’image */
 .img-content {
     width: 50%;
-    position: sticky;
     top: 70px;
-    height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    position: sticky;
+    align-self: flex-start;
 
 
   @media (max-width: 758px) {
@@ -46,6 +46,7 @@ const props = defineProps({
   border-radius: 8px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
+
 }
 
 /* Texte sous l’image */
@@ -59,7 +60,10 @@ figcaption {
 /* ✅ Variante pour la bio */
 .bio-content .img-content {
   margin-bottom: 40px;
+}
 
+.film-details .img-content {
+  margin-bottom: 40px;
 }
 
 /* ✅ Variante pour les images en groupe */

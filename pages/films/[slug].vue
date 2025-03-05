@@ -8,8 +8,9 @@
         <h1 class="film-title"  :class="{ visible: isRevealed }">{{ film.title }}</h1>
       </div>
     </section>
-    <section class="film-details">
-      <div class="info_cast_release">
+    <section>
+      <div class="film-details">
+        <div class="info_cast_release">
         <p class="description">{{ film.description }}</p>
         <hr>
         <p class="release_date"> <strong>Date de sortie :</strong> {{ film.release_date }}</p>
@@ -23,9 +24,15 @@
           </ul>
         </div>
       </div>
-      <div class="poster">
-        <NuxtImg :src="film.poster" :alt="film.title" width="400" :provider="null" />
+      <ImgSticky 
+        :src="film.poster" 
+        :alt="film.title" 
+        :width="400" 
+        :height="600" 
+        class="imgSticky_desktop"
+      />
       </div>
+     
     </section>
     <hr>
     <section>
@@ -35,7 +42,7 @@
           :src="`${film.video_src}?autoplay=1&controls=1&mute=0`"
           frameborder="0"
           allow="autoplay; encrypted-media"
-          allowfullscreen title="Trailer" width="100%" height="500"
+          allowfullscreen title="Trailer" width="100%"
         ></iframe>
       </div>
     </section>
@@ -45,14 +52,9 @@
         <p>{{ film.synopsis }}</p>
       </div>
     </section>
+    <hr>
     <section class="gallery_container">
-      <div class="gallery">
-        <figure v-for="(image, i) in film.images" :key="i">
-          <NuxtImg :src="image.src"
-          :alt="image.alt" width="420" height="280"/>
-          <figcaption>{{ image.alt }}</figcaption>
-        </figure>
-      </div>
+     <SlideShowGallery :film="film" v-if="film"/>
     </section>
 
   </main> 
@@ -65,6 +67,8 @@ import { ref, watchEffect, onMounted } from 'vue';
 import { useFetch } from "#app";
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
+import SlideShowGallery from '../components/SlideShowGallery.vue';
+import ImgSticky from '../components/ImgSticky.vue';
 
 const route = useRoute();
 const film = ref(null);

@@ -20,6 +20,7 @@ const props = defineProps<{
   width: 100%;
   height: 200px;
   overflow: hidden;
+  margin: 100px 0 0 0;
 }
 
 .bg-container {
@@ -33,5 +34,4 @@ const props = defineProps<{
   width: 100%;
   height: 100%;
 }
-
 </style>

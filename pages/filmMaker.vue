@@ -78,6 +78,15 @@
       <ImgSticky src="/images/chemin_or_blanc_affiche.webp" alt="Affiche 'Le chemin de l'or Blanc'" :width="300" :height="390" class="imgSticky_desktop"  />
     </div>
     </section>
+    <section class="credits">
+      <span>Crédits : </span><a href="https://fr.vecteezy.com/vecteur-libre/t%C3%A9l%C3%A9vision">Télévision Vecteurs par Vecteezy, </a>
+      <a href="https://fr.vecteezy.com/vecteur-libre/camera-video">Camera Video Vecteurs par Vecteezy, </a>
+      <a href="https://fr.vecteezy.com/vecteur-libre/flamme">Flamme Vecteurs par Vecteezy, </a>
+      <a href="https://fr.vecteezy.com/vecteur-libre/film">Film Vecteurs par Vecteezy, </a>
+      <a href="https://fr.vecteezy.com/vecteur-libre/clapboard">Clapboard Vecteurs par Vecteezy, </a>
+      <a href="https://fr.freepik.com/vecteurs-libre/fond-rideau-soie-rouge_5597360.htm#fromView=search&page=1&position=1&uuid=16b3fbe8-e362-48c7-bc63-631cf8d6b331&new_detail=true&query=rideau+th%C3%A9%C3%A2tre">Rideau de cinéma par Freepik, </a>
+    </section>
+ 
   </main>
   <Footer />
 </template>

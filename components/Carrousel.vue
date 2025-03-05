@@ -101,14 +101,19 @@ onUnmounted(() => { clearInterval(intervalId); });
 .film-info {
   position: absolute;
   left: 5%;
-  bottom: 20%;
+  bottom: 5%;
   background: rgba(0, 0, 0, 0.7);
   color: white;
-  padding: 20px;
+  padding: 5px 10px;
   border-radius: 5px;
   text-align: left;
   opacity: 0;
   transition: all 0.8s ease-in-out;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    left: 2%;
+  }
 }
 
 .video-container.active .film-info {
@@ -117,10 +122,10 @@ onUnmounted(() => { clearInterval(intervalId); });
 
 .btn-discover {
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 5px;
   background: linear-gradient(212deg, rgba(12, 173, 161, 1) 30%, rgba(12, 148, 138, 0.98) 48%, rgba(14, 124, 139, 1) 78%);
   color: white;
-  padding: 10px 20px;
+  padding: 5px;
   text-decoration: none;
   border-radius: 5px;
   font-weight: bold;
