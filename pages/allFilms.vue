@@ -36,6 +36,21 @@ const applyTagFilter = (tag) => {
 const resetFilter = () => {
   fetchAllFilms();
 };
+
+useSeoMeta({
+  title: 'Filmographie complète de Jimmy-Paul Coti | CG-Film Camargue',
+  description: 'Découvrez tous les films réalisés par Jimmy-Paul Coti, réalisateur indépendant primé à l\'international : aventures, documentaires, courts et longs métrages.',
+  ogTitle: 'Films de Jimmy-Paul Coti | CG-Film Camargue',
+  ogDescription: 'Explorez la collection complète des œuvres cinématographiques de Jimmy-Paul Coti, diffusées dans plus de 22 pays.',
+  ogImage: '/images/chemin_or_blanc_affiche.webp',
+  twitterCard: 'summary_large_image',
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: 'https://cg-film.com/allFilms' },
+  ]
+})
 </script>
 
 <style lang="scss" scoped>

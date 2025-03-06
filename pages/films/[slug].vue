@@ -49,6 +49,11 @@
     <hr>
     <section>
       <div class="synopsis">
+        <h3>Un film de {{ film.film_maker }}</h3>
+        <h4>{{ film.coproduction }}</h4>
+        <h5>{{ film.version }}</h5>
+        <h6 v-if="film.visa_cnc">Visa CNC : N° {{ film.visa_cnc }}</h6>
+        <p>{{ film.traduction }}</p>
         <p>{{ film.synopsis }}</p>
       </div>
     </section>
@@ -78,6 +83,22 @@ const error = ref(null);
   
   if (data.value) {
     film.value = data.value;
+
+    useSeoMeta({
+    title: `${film.value.title} | Film de Jimmy-Paul Coti`,
+    description: film.value.synopsis.substring(0, 160),
+    ogTitle: `${film.value.title} | Découvrez le film de Jimmy-Paul Coti`,
+    ogDescription: film.value.synopsis.substring(0, 160),
+    ogImage: film.value.poster,
+    twitterCard: 'summary_large_image',
+  });
+
+  useHead({
+    link: [
+      { rel: 'canonical', href: `https://cg-film.com/films/${route.params.slug}` },
+    ]
+  });
+
   } else {
     error.value = "Erreur lors de la récupération des données";
   }

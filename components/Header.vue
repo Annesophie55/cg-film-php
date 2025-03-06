@@ -11,11 +11,10 @@
         <li class="nav-link"><nuxt-link to="/">Accueil</nuxt-link></li>
         <li class="nav-link"><nuxt-link to="/filmMaker">Le réalisateur</nuxt-link></li>
         <li class="nav-link"><nuxt-link to="/allFilms">Films</nuxt-link></li>
-        <li class="nav-link"><nuxt-link to="/featured">En vedette</nuxt-link></li>
         <li class="nav-link"><nuxt-link to="/contact">Contact</nuxt-link></li>
         <li>
           <div class="header-extras-mobile">
-            <LanguageSwitch />
+            <!-- <LanguageSwitch /> -->
             <ul class="social-links">
               <li>
                 <a href="https://www.youtube.com/user/cgfilm13" aria-label="Lien vers le YouTube de cgfilm13">
@@ -47,7 +46,7 @@
       </button>
 
       <div class="header-extras">
-        <LanguageSwitch />
+        <!-- <LanguageSwitch /> -->
         <ul class="social-links">
           <li>
             <a href="https://www.youtube.com/user/cgfilm13" aria-label="YouTube">

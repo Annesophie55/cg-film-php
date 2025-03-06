@@ -39,7 +39,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { useFetch } from "#app";
-import { defineEmits } from "vue";
 
 const emit = defineEmits(["filterByTag"]);
 

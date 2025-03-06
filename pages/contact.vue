@@ -27,7 +27,7 @@
           <p v-if="successMessage" class="success">{{ successMessage }}</p>
 
           <!-- Bouton avec reCAPTCHA -->
-          <button type="submit" class="g-recaptcha" :disabled="isLoading">
+          <button type="submit" :disabled="isLoading">
             {{ isLoading ? "Envoi en cours..." : "Envoyer" }}
           </button>
         </form>
@@ -100,7 +100,7 @@ const submitForm = async () => {
 
   try {
     // Exécution reCAPTCHA
-    const recaptchaToken = await grecaptcha.execute("TA_CLE_SITE", { action: "contact" });
+    const recaptchaToken = await grecaptcha.execute("6LfsPusqAAAAAAjf0jFFafoQlhOSZ898itopjt3B", { action: "contact" });
     form.value.recaptchaResponse = recaptchaToken;
 
     // Création du FormData
@@ -108,7 +108,7 @@ const submitForm = async () => {
     Object.keys(form.value).forEach((key) => formData.append(key, form.value[key]));
 
     // Envoi des données au serveur PHP
-    const response = await fetch("/contact.php", {
+    const response = await fetch("http://localhost/cg-film-new/server/contact.php", {
       method: "POST",
       body: formData,
     });
@@ -127,6 +127,21 @@ const submitForm = async () => {
     isLoading.value = false;
   }
 };
+
+useSeoMeta({
+  title: 'Contactez-nous',
+  description: 'Contactez CG-Film Camargue pour toute demande relative aux films de Jimmy-Paul Coti.',
+  ogTitle: 'Contact | CG-Film Camargue',
+  ogDescription: 'Pour toute demande concernant Jimmy-Paul Coti ou ses films, contactez CG-Film.',
+  ogImage: '/images/logo.webp',
+  twitterCard: 'summary',
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: 'https://cg-film.com/contact' },
+  ]
+})
 </script>
 <style lang="scss" scoped>
   @use '@/assets/scss/pages/contact.scss';

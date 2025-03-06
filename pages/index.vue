@@ -31,7 +31,14 @@
 
       <section class="films">
         <h2 class="section-title">Les œuvres de Jimmy-Paul Coti</h2>
-        <Gallery :films="films?.slice(0, 2) ?? []" v-if="films && films.length" />
+        <div class="film-cards" v-if="films && films.length">
+          <FilmCard 
+            v-for="film in films" 
+            :key="film.film_id" 
+            :film="film" 
+          />
+        </div>
+
         <p v-else>Chargement des films...</p>
         <NuxtLink to="/allFilms" class="btn-translucide">
         Accéder à la filmographie complète
@@ -117,10 +124,22 @@ import NumberCounter from '~/components/NumberCounter.vue';
 import { useFetch } from '#app';
 
 // Fetch des films
-const { data: films } = useFetch('http://localhost/cg-film-new/server/api/films_card.php', {
-  transform: (res) => Array.isArray(res) ? res : [res]
+const { data: films, refresh } = useFetch('http://localhost/cg-film-new/server/api/films_card.php', {
+  key: 'home-films'
 });
 
+onMounted(() => {
+  refresh();
+});
+
+useSeoMeta({
+  title: 'Accueil',
+  description: 'Découvrez les films et documentaires du réalisateur Jimmy-Paul Coti, spécialiste d\'aventures humaines exceptionnelles.',
+  ogTitle: 'CG-Film Camargue | Jimmy-Paul Coti - Accueil',
+  ogDescription: 'Découvrez les œuvres exceptionnelles de Jimmy-Paul Coti.',
+  ogImage: '/images/portrait.webp',
+  twitterCard: 'summary_large_image',
+})
 
 
 

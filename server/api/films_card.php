@@ -22,6 +22,7 @@ try {
     LEFT JOIN film_tag ft ON f.id = ft.film_id
     LEFT JOIN tags t ON ft.tag_id = t.id
     GROUP BY f.id
+    LIMIT 2
     ";
 
     $stmt = $pdo->query($query);

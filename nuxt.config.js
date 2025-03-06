@@ -1,6 +1,24 @@
 import { defineNuxtConfig } from 'nuxt/config';
 
 export default defineNuxtConfig({
+  app: {
+    head: {
+      script: [
+        { src: "https://www.google.com/recaptcha/api.js?render=6LfsPusqAAAAAAjf0jFFafoQlhOSZ898itopjt3B", async: true, defer: true }
+      ],
+      titleTemplate: '%s - CG-Film Camargue',
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { charset: 'utf-8' },
+        { hid: 'description', name: 'description', content: 'Jimmy-Paul Coti, réalisateur indépendant : films, aventures humaines et documentaires exceptionnels.' },
+        { name: 'format-detection', content: 'telephone=no' },
+        { name: 'author', content: 'CG-Film Camargue' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:locale', content: 'fr_FR' },
+      ],
+      link: [{ rel: 'icon', type: 'image/png', href: '/favicon.png' }],
+    }
+  },
   type: 'module',
   target: 'static',
   ssr: false, // Désactive le SSR (Nuxt devient un SPA)

@@ -101,6 +101,21 @@ import CinemaCurtain from '~/components/CinemaCurtain.vue';
 import Parallax from '~/components/Parallax.vue';
 import ImgSticky from '~/components/ImgSticky.vue';
 
+useSeoMeta({
+  title: 'Jimmy-Paul Coti - Parcours et réalisations | CG-Film Camargue',
+  description: 'Découvrez la vie, le parcours cinématographique et les réalisations exceptionnelles de Jimmy-Paul Coti, réalisateur indépendant depuis plus de 40 ans.',
+  ogTitle: 'Jimmy-Paul Coti : réalisateur passionné et visionnaire | CG-Film Camargue',
+  ogDescription: 'Explorez le parcours fascinant de Jimmy-Paul Coti, des débuts audacieux en Super 8 à ses films mondialement diffusés.',
+  ogImage: '/images/jimmy_radeau.webp',
+  twitterCard: 'summary_large_image',
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: 'https://cg-film.com/filmMaker' },
+  ]
+})
+
 </script>
 
 <style scoped lang="scss">

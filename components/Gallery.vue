@@ -6,7 +6,6 @@
 
 <script setup>
 import FilmCard from "@/components/FilmCard.vue";
-import { searchResults } from "@/composables/searchStore";
 </script>
 
 
